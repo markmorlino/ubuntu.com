@@ -245,7 +245,10 @@ def create_notice():
             400,
         )
 
-    return flask.jsonify({"message": "Notice created"}), 201
+    return flask.jsonify(
+               {"message": f"Notice {notice_data['id']} created"}
+           ),
+           201
 
 
 @authorization_required
@@ -281,7 +284,7 @@ def update_notice(notice_id):
     db_session.add(notice)
     db_session.commit()
 
-    return flask.jsonify({"message": "Notice updated"}), 200
+    return flask.jsonify({"message": f"Notice {notice_id} updated"}), 200
 
 
 @authorization_required
@@ -461,7 +464,7 @@ def delete_cve(cve_id):
     except IntegrityError as error:
         return flask.jsonify({"message": error.orig.args[0]}), 400
 
-    return flask.jsonify({"message": "CVE deleted successfully"}), 200
+    return flask.jsonify({"message": f"CVE {cve_id} deleted successfully"}), 200
 
 
 @authorization_required
